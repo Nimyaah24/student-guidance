@@ -1,0 +1,143 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f6fa;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  transition: color 0.4s ease, text-shadow 0.4s ease;
+}
+
+/* --- Dark Mode --- */
+.dark-mode {
+  background-color: #111 !important;
+  color: white;
+
+}
+
+.dark-mode h1 {
+  color: #4da3ff;
+  text-shadow: 0 0 10px rgba(77, 163, 255, 0.6);
+}
+
+/* --- Form --- */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin: 0 auto 20px;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: background 0.4s ease;
+}
+
+.dark-mode form {
+  background: #222;
+}
+
+input,
+textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: white;
+  color: #000;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.dark-mode input,
+.dark-mode textarea {
+  background: #333;
+  color: white;
+  border-color: #555;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+/* --- Table --- */
+table {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: white;
+  border-collapse: collapse;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: background 0.4s ease;
+}
+
+table th {
+  background-color: #3498db;
+  color: white;
+  padding: 10px;
+}
+
+table td {
+  padding: 10px;
+  text-align: center;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.dark-mode table {
+  background: #222;
+  color: white;
+}
+
+.dark-mode table tr:nth-child(even) {
+  background: #333;
+}
+
+table button {
+  margin: 0 5px;
+  background-color: #2ecc71;
+}
+
+table button:last-child {
+  background-color: #e74c3c;
+}
+
+table button:hover {
+  opacity: 0.8;
+}
+
+/* --- Dark Mode Toggle Button --- */
+.dark-toggle {
+  position: relative;
+  /* top: 10px; */
+  right: 10px;
+  background: transparent;
+  border: 1px solid #bec0be;
+  color: #686767;
+  border-radius: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dark-toggle:hover {
+  background: #4da3ff;
+  border-color: #4da3ff;
+  color: #000;
+}
