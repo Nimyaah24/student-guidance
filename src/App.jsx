@@ -7,12 +7,14 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [students, setStudents] = useState([]);
+
   const [formData, setFormData] = useState({
     name: "",
     course: "",
     counselor: "",
     notes: "",
   });
+
   const [editId, setEditId] = useState(null);
   const [search, setSearch] = useState("");
   const [darkMode, setDarkMode] = useState(false);
@@ -24,17 +26,36 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (editId) {
       setStudents(
-        students.map((s) => (s.id === editId ? { ...formData, id: editId } : s))
+        students.map((s) =>
+          s.id === editId
+            ? { ...formData, id: editId }
+            : s
+        )
       );
+
       toast.success("Student updated successfully!");
       setEditId(null);
     } else {
-      setStudents([...students, { ...formData, id: Date.now() }]);
+      setStudents([
+        ...students,
+        {
+          ...formData,
+          id: Date.now(),
+        },
+      ]);
+
       toast.success("Student added successfully!");
     }
-    setFormData({ name: "", course: "", counselor: "", notes: "" });
+
+    setFormData({
+      name: "",
+      course: "",
+      counselor: "",
+      notes: "",
+    });
   };
 
   const handleEdit = (student) => {
@@ -48,74 +69,104 @@ function App() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
-      {/* Toast container (top-right) */}
-      <ToastContainer position="top-right" autoClose={2000} />
+    <div className="app-container">
+
+      {/* Toast */}
+      <ToastContainer position="top-right" />
 
       {/* Dark Mode Button */}
-      <button className="dark-toggle" onClick={() => setDarkMode(!darkMode)}>
+      <button
+        className="dark-toggle"
+        onClick={() => setDarkMode(!darkMode)}
+      >
         {darkMode ? "☀️ Light" : "🌙 Dark"}
       </button>
 
+      {/* Heading */}
       <h1>🎓 Student Guidance Management</h1>
 
       {/* Form Section */}
       <form onSubmit={handleSubmit}>
+
         <input
           type="text"
           placeholder="Student Name"
           value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          onChange={(e) =>
+            setFormData({
+              ...formData,
+              name: e.target.value,
+            })
+          }
           required
         />
+
         <input
           type="text"
           placeholder="Course"
           value={formData.course}
-          onChange={(e) => setFormData({ ...formData, course: e.target.value })}
+          onChange={(e) =>
+            setFormData({
+              ...formData,
+              course: e.target.value,
+            })
+          }
           required
         />
+
         <input
           type="text"
           placeholder="Counselor"
           value={formData.counselor}
           onChange={(e) =>
-            setFormData({ ...formData, counselor: e.target.value })
+            setFormData({
+              ...formData,
+              counselor: e.target.value,
+            })
           }
           required
         />
+
         <textarea
           placeholder="Guidance Notes"
           value={formData.notes}
-          onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+          onChange={(e) =>
+            setFormData({
+              ...formData,
+              notes: e.target.value,
+            })
+          }
           required
         />
-        <button type="submit">{editId ? "Update" : "Add"}</button>
+
+        <button type="submit">
+          {editId ? "Update" : "Add"}
+        </button>
+
       </form>
 
       {/* Search Bar */}
       <input
+        className="search-input"
         type="text"
         placeholder="Search by name or course..."
-        onChange={(e) => setSearch(e.target.value.toLowerCase())}
-        style={{
-          padding: "10px",
-          width: "100%",
-          maxWidth: "400px",
-          margin: "0 auto 20px",
-          display: "block",
-        }}
+        value={search}
+        onChange={(e) =>
+          setSearch(e.target.value.toLowerCase())
+        }
       />
 
       {/* Student Table */}
-      <StudentList
-        students={students}
-        search={search}
-        onEdit={handleEdit}
-        onDelete={handleDelete}
-      />
+      <div className="table-container">
+        <StudentList
+          students={students}
+          search={search}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
+      </div>
 
-      {/* Edit Modal (if editing) */}
+      {/* Edit Modal */}
       {editId && (
         <EditModal
           student={formData}
@@ -123,14 +174,21 @@ function App() {
           onUpdate={(updatedStudent) => {
             setStudents(
               students.map((s) =>
-                s.id === updatedStudent.id ? updatedStudent : s
+                s.id === updatedStudent.id
+                  ? updatedStudent
+                  : s
               )
             );
-            toast.success("Student updated successfully!");
+
+            toast.success(
+              "Student updated successfully!"
+            );
+
             setEditId(null);
           }}
         />
       )}
+
     </div>
   );
 }
